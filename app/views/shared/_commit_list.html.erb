@@ -1,0 +1,35 @@
+<ul class="commits">
+  <% commits.each do |commit| %>
+    <li class="commit">
+      <strong><%= commit.message %> <a href="<%= "#{commit.github_url}" %>" class="notice"><%= commit.formatted_sha1 %></a></strong>
+      <span class="author"><img src="<%= commit.author_gravatar_url %>"/><%= commit.author_name || commit.email %> merged <%= commit.formatted_timestamp %> ago</span>
+
+      <% case commit.deploy_status %>
+      <% when "started" %>
+        <span class="notice">⋯ Deploy in progress</span>
+      <% when "failed" %>
+        <span class="bad notice">✗ Failed to deploy</span>
+        ✗
+      <% when "succeeded" %>
+        <span class="good notice">✓ Deployed to staging</span>
+      <% end %>
+
+      <hr />
+
+      <% if commit.state == "verified" %>
+        <%= link_to "Mark as bad", fail_commit_path(commit), class: "js-commit-action bad button" %>
+      <% elsif commit.state == "failed" %>
+        <%= link_to 'Verify', verify_commit_path(commit), class: "js-commit-action good button" %>
+        <% if commit.remindable? %>
+          <%= link_to 'Remind', remind_commit_path(commit), class: "js-commit-action gray button", data: { success_text: "Reminded!" } %>
+        <% end %>
+      <% else %>        
+        <%= link_to 'Verify', verify_commit_path(commit), class: "js-commit-action good button" %>
+        <%= link_to "Mark as bad", fail_commit_path(commit), class: "js-commit-action bad button" %>
+        <% if commit.remindable? %>
+          <%= link_to 'Remind', remind_commit_path(commit), class: "js-commit-action gray button", data: { success_text: "Reminded!" } %>
+        <% end %>
+      <% end %> 
+    </li>
+  <% end %>
+</ul>

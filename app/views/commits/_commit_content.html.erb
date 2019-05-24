@@ -1,0 +1,16 @@
+<% unless @failed_commits.empty? %>
+  <div class="failed-commits bad notice">
+    <h3>Failed commits, do not deploy:</h3>
+    <%= render "shared/commit_list", commits: @failed_commits %>
+  </div>
+<% end %>
+
+<% unless @unchecked_commits.empty? %>
+  <div class="to-verify-commits">
+    <%= render "shared/commit_list", commits: @unchecked_commits %>
+  </div>
+<% end %>
+<% unless @past_commits.empty? %>
+  <h3>Verified commits:</h3>
+  <%= render "shared/commit_list", commits: @past_commits %>
+<% end %>

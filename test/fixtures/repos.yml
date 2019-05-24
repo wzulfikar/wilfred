@@ -1,0 +1,4 @@
+repo:
+  organization: 'octokitty'
+  name: 'testing'
+  branch: 'master'

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Wilfred</title>
+  <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+  <%= favicon_link_tag asset_path('favicons/favicon-32x32.png') %>
+  <%= stylesheet_link_tag :application %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <header>
+    <h1>
+      Wilfred
+      <small>
+        <%= current_user.try(:repo).try(:full_name_verbose) || "Verify your commits" %>
+      </small>
+    </h1>
+
+    <ul class="navigation">
+      <% if current_user.present? %>
+        <li><%= link_to "Logout", logout_path %></li>
+      <% else %>
+        <li>
+          <%= link_to "Log in with GitHub", user_github_omniauth_authorize_path %>
+        </li>
+      <% end %>
+    </ul>
+  </header>
+
+  <div class="content yield"> 
+    <%= yield %>
+  </div>
+
+  <%= javascript_include_tag :application %>
+</body>
+</html>

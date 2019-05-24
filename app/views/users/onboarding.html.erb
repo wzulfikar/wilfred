@@ -1,0 +1,18 @@
+<form>
+  <h3>Which repository do you want to use Wilfred with?</h3>
+
+  <div class="container">
+    <select class="organization js-organization">
+      <option val="" disabled>Organization</option>
+      <% @organizations.each do |organization| %>
+        <option val="<%= organization.login %>"><%= organization.login %></option>
+      <% end %>
+    </select>
+
+    <select class="repo js-repo disabled">
+      <option val="">Repository</option>
+    </select>
+  </div>
+
+  <a href="<%= save_picked_repo_url %>" class="js-pick-repo-action good button">Select repository</a>
+</form>

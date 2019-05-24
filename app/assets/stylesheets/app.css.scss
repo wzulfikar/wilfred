@@ -1,0 +1,260 @@
+body {
+  color: #333;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+  background: #f5f5f5;
+}
+
+a {
+  text-decoration: none;
+}
+
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: asset-url("select_dropdown_indicator_dark.png") right 15px center white;
+  background-size: 20px;
+  background-repeat: no-repeat;
+  text-overflow: ellipsis;
+  padding-right: 20px;
+  overflow: hidden;
+  white-space: nowrap;
+  display: block;
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+
+  &.disabled {
+    opacity: .4;
+  }
+}
+
+header,
+.content {
+  max-width: 960px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+header {
+  background: black;
+  margin-top: 20px;
+  padding: 15px 20px;
+  overflow: hidden;
+  line-height: 27px;
+
+  h1 {
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    text-decoration: none;
+    float: left;
+
+    small {
+      color: #666;
+      font-size: 15px;
+      margin-left: 5px;
+    }
+  }
+
+  .navigation {
+    float: right;
+    font-size: 15px;
+    line-height: 27px;
+
+    li {
+      float: right;
+      margin-left: 10px;
+      color: #666;
+
+      a {
+        color: white;
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+@media (max-width: 800px) {
+  header {
+    margin-top: 0;
+  }
+}
+
+h3 {
+  color: #000;
+  padding: 20px 20px 0;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.commits {
+  margin: 0 20px;
+}
+
+.commit {
+  border-top: 1px solid rgba(0, 0, 0, .15);
+  margin-top: 20px;
+  padding-top: 20px;
+  overflow: hidden;
+
+  &:first-of-type {
+    margin-top: 0;
+    border-top: none;
+  }
+
+  &:last-of-type {
+    margin-bottom: 20px;
+  }
+
+  strong {
+    font-size: 18px;
+    line-height: 27px;
+    display: block;
+    margin-bottom: 10px;
+
+    a {
+      color: #686868;
+      font-family: monospace;
+      font-size: 8px;
+      background: #d9d9d9;
+    }
+  }
+
+  .author {
+    color: #666;
+    line-height: 24px;
+
+    img {
+      border-radius: 99px;
+      height: 24px;
+      width: 24px;
+      display: inline-block;
+      vertical-align: bottom;
+      margin-right: 10px;
+    }
+  }
+
+  .author + .notice {
+    margin-left: 10px;
+  }
+
+  hr {
+    display: none;
+  }
+}
+
+@media (max-width: 800px) {
+  .commit hr {
+    display: block;
+    margin-bottom: 20px;
+  }
+
+  .commit .button {
+    float: left;
+    margin-left: 0;
+    margin-right: 15px;
+  }
+}
+
+.notice {
+  border-radius: 4px;
+  padding: 2px 4px;
+  color: #686868;
+}
+
+.good {
+  color: #426e27;
+}
+
+.bad {
+  color: #63111a;
+}
+
+.gray {
+  color: #666;
+}
+
+.button {
+  border-radius: 4px;
+  padding: 3px 6px;
+  font-size: 13px;
+  float: right;
+  margin-left: 15px;
+
+  &:hover {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    margin-top: -1px;
+    margin-bottom: 1px;
+  }
+
+  &:active {
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.4),
+      inset 0 100px 100px rgba(0, 0, 0, 0.1);
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  &.good {
+    background: #bfe4a8;    
+  }
+
+  &.bad {
+    background: #ffa7b1;
+  }
+
+  &.gray {
+    background: #ccc;
+  }
+}
+
+.failed-commits {
+  border-radius: 0;
+  margin: 0;
+  background: #ffa7b1;
+}
+
+.to-verify-commits {
+  background: white;
+  padding-bottom: 1px;
+}
+
+form {
+  padding: 0 20px 20px;
+
+  h3 {
+    padding: 60px 0 20px;
+    padding-left: 0;
+    text-align: center;
+  }
+
+  select {
+    font-size: 20px;
+    padding: 15px;
+    margin-top: 20px;
+
+    &:last-child {
+      margin-bottom: 20px;
+    }
+  }
+
+  .button {
+    clear: both;
+    float: none;
+    display: block;
+    font-size: 20px;
+    padding: 15px;
+    text-align: center;
+    margin-left: 0;
+  }
+
+  select,
+  .button {
+    width: 61%;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+  }
+}
