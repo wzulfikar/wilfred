@@ -21,7 +21,7 @@
         <li><%= link_to "Logout", logout_path %></li>
       <% else %>
         <li>
-          <%= link_to "Log in with GitHub", user_github_omniauth_authorize_path %>
+          <%= link_to "Log in with GitHub", user_github_omniauth_authorize_path, method: :post %>
         </li>
       <% end %>
     </ul>
