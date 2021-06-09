@@ -27,3 +27,7 @@ group :development, :test do
   gem "rubocop"
   gem "rubocop-performance"
 end
+
+gem "omniauth-rails_csrf_protection", "~> 1.0"
+
+gem "rails-ujs", "~> 0.1.0"
