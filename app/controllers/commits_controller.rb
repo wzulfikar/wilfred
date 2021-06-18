@@ -8,7 +8,7 @@ class CommitsController < ApplicationController
 
   def index
     return redirect_to onboarding_url if current_user.incomplete?
-    return redirect_to user_slack_omniauth_authorize_path if current_user.slack_username.nil?
+    return redirect_to onboarding_slack_path if current_user.slack_username.nil?
     prepare_commits
   end
 

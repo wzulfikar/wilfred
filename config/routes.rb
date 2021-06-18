@@ -4,6 +4,7 @@ Wilfred::Application.routes.draw do
     get "/logout", to: "devise/sessions#destroy", as: :logout
   end
   get "/onboarding", to: "users#onboarding", as: :onboarding
+  get "/onboarding/slack", to: "users#onboarding_slack", as: :onboarding_slack
   get "/repos", to: "users#repos", as: :repos
   post "/repos/pick", to: "users#save_picked_repo", as: :save_picked_repo
 
