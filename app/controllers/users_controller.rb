@@ -9,6 +9,10 @@ class UsersController < ApplicationController
     @organizations = current_user.github.organizations
   end
 
+  def onboarding_slack
+    @name = current_user.username || current_user.email    
+  end
+
   def repos
     render json: {
       success: true,

@@ -251,3 +251,19 @@ form {
     box-sizing: border-box;
   }
 }
+
+.onboarding-slack {
+  .content {
+    padding: 20px 20px 0px;
+    form {
+      padding: 0px;
+    }
+    .button.login-to-slack {
+      margin: 20px 0px;
+      max-width: 295px;
+      background: black;
+      color: white;
+      cursor: pointer;
+    }
+  }
+}
