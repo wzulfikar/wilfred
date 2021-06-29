@@ -4,7 +4,7 @@ class CommitsController < ApplicationController
   skip_before_filter :verify_authenticity_token
   before_filter :fetch_commit, except: [:index]
 
-  PAST_COMMIT_COUNT = 25
+  PAST_COMMIT_COUNT = 50
 
   def index
     return redirect_to onboarding_url if current_user.incomplete?
