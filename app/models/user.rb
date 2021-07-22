@@ -10,6 +10,10 @@ class User < ActiveRecord::Base
 
   belongs_to :repo
 
+  def self.github_bot
+    User.find_by_username(ENV["GH_BOT_USERNAME"]) if ENV["GH_BOT_USERNAME"].present?
+  end
+
   def password_required?
     false
   end

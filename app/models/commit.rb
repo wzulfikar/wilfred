@@ -23,7 +23,9 @@ class Commit < ActiveRecord::Base
 
   def update_deploy_status(status)
     update_attributes!(deploy_status: status)
-    notify_user_to_verify(User.first, "Your commit, %s (%s), is now on staging." % [formatted_sha1, message]) if deploy_status == "succeeded"
+    return unless deploy_status == "succeeded"
+    notify_user_to_verify(User.first, "Your commit, %s (%s), is now on staging." % [formatted_sha1, message])
+    notify_github_on_successful_deployment
   end
 
   def notify_user_to_verify(user, slack_message)
@@ -33,6 +35,14 @@ class Commit < ActiveRecord::Base
       Rails.logger.info("saying to #{slack_username}: #{slack_message}")
       user.slack.chat_postMessage(channel: slack_username, text: slack_message, username: "Wilfred", as_user: false)
     end
+  end
+
+  def notify_github_on_successful_deployment
+    user = User.github_bot || User.find_by_email(email) || User.first
+    pr = user.github.get("repos/gumroad/web/commits/#{sha1}/pulls", accept: "application/vnd.github.groot-preview+json").first
+    pr_number = pr.number
+    Rails.logger.info("Posting to Github PR ##{pr_number}")
+    user.github.add_comment(repo.full_name, pr_number, "Pull request ##{pr_number} #{pr.title} is now deployed on staging.")
   end
 
   def remindable?
