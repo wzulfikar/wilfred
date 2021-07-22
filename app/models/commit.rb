@@ -39,10 +39,13 @@ class Commit < ActiveRecord::Base
 
   def notify_github_on_successful_deployment
     user = User.github_bot || User.find_by_email(email) || User.first
-    pr = user.github.get("repos/gumroad/web/commits/#{sha1}/pulls", accept: "application/vnd.github.groot-preview+json").first
-    pr_number = pr.number
-    Rails.logger.info("Posting to Github PR ##{pr_number}")
-    user.github.add_comment(repo.full_name, pr_number, "Pull request ##{pr_number} #{pr.title} is now deployed on staging.")
+    pr = associated_pull_request
+    Rails.logger.info("Posting to Github PR ##{pr.number}")
+    user.github.add_comment(repo.full_name, pr.number, "Pull request ##{pr.number} #{pr.title} is now deployed on staging.")
+  end
+
+  def associated_pull_request
+    User.first.github.get("repos/#{repo.full_name}/commits/#{sha1}/pulls", accept: "application/vnd.github.groot-preview+json").first
   end
 
   def remindable?
