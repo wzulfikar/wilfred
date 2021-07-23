@@ -10,6 +10,10 @@ class User < ActiveRecord::Base
 
   belongs_to :repo
 
+  def self.github_bot
+    User.find_by_username(ENV["GH_BOT_USERNAME"]) if ENV["GH_BOT_USERNAME"].present?
+  end
+
   def password_required?
     false
   end
@@ -35,5 +39,10 @@ class User < ActiveRecord::Base
     slack_message = "All commits have been verified! <@#{slack_username}>, could you please deploy?"
     Rails.logger.info("saying to slack room: #{slack_message}")
     slack.chat_postMessage(channel: ENV["SLACK_ROOM"], text: slack_message, username: "Wilfred", as_user: false)
+  end
+
+  def post_to_github_issue(issue_number, message)
+    Rails.logger.info("Posting to Github ##{issue_number}")
+    github.add_comment(repo.full_name, issue_number, message)
   end
 end

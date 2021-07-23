@@ -25,6 +25,7 @@ class CommitsController < ApplicationController
     @commit.update_attributes(state: "verified")
     prepare_commits
     current_user.notify_to_deploy if @unchecked_commits.empty? && @failed_commits.empty?
+    current_user.post_to_github_issue(@commit.associated_pull_request.number, "Marked as verified by #{current_user.username}")
     render_json_success_response
   end
 
