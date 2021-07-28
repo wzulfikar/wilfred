@@ -40,7 +40,7 @@ class Commit < ActiveRecord::Base
   def notify_github_on_successful_deployment
     commenter = User.github_bot || User.find_by_email(email) || User.first
     pr = associated_pull_request
-    commenter.post_to_github_issue(pr.number, "Pull request ##{pr.number} #{pr.title} is now deployed on staging.")
+    commenter.post_to_github_issue(pr.number, "This PR is now on staging.")
   end
 
   def associated_pull_request
