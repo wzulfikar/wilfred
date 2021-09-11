@@ -27,6 +27,10 @@
     </ul>
   </header>
 
+  <% flash.each do |message_type, message| %>
+    <h3><%= message %></h3>
+  <% end %>
+
   <div class="content yield"> 
     <%= yield %>
   </div>

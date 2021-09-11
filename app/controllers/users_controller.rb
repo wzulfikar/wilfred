@@ -4,13 +4,14 @@ class UsersController < ApplicationController
   include ApplicationHelper
 
   skip_before_filter :verify_authenticity_token
+  before_action :authenticate_user!, only: [:onboarding, :onboarding_slack, :repos]
 
   def onboarding
     @organizations = current_user.github.organizations
   end
 
   def onboarding_slack
-    @name = current_user.username || current_user.email    
+    @name = current_user.username || current_user.email
   end
 
   def repos

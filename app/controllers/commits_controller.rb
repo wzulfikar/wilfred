@@ -2,6 +2,7 @@
 
 class CommitsController < ApplicationController
   skip_before_filter :verify_authenticity_token
+  before_action :authenticate_user!, only: [:index]
   before_filter :fetch_commit, except: [:index]
 
   PAST_COMMIT_COUNT = 50
