@@ -7,7 +7,7 @@ class UsersControllerTest < ActionController::TestCase
 
   def assert_redirect
     assert_redirected_to(controller: "public")
-    assert_equal("Please login to continue", flash[:notice])
+    assert_equal("Please log in to continue.", flash[:notice])
   end
 
   test "redirect from /onboarding if not logged in" do  
